@@ -1,0 +1,10 @@
+{
+  "opts": {
+    "debug": true,
+    "recurse": true
+  },
+  "source": {
+    "include": ["test"]
+  },
+  "plugins": ["."]
+}
