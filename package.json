@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-memberof-namespace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JSDoc plugin to automatically set @memberof to index.js @namespace",
   "main": "index.js",
   "repository": "https://github.com/kozhevnikov/jsdoc-memberof-namespace",
