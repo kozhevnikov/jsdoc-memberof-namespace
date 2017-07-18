@@ -8,4 +8,9 @@
  * @memberof foo
  */
 class FooClass {
+  /**
+   * Foo Method
+   */
+  fooMethod() {
+  }
 }

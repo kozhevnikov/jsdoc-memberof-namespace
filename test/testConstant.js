@@ -1,0 +1,4 @@
+/**
+ * Test Constant
+ */
+const testConstant = {};

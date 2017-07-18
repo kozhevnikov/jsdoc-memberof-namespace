@@ -3,7 +3,7 @@ const path = require('path');
 
 logger.debug('[JMN] Loaded jsdoc-memberof-namespace');
 
-const kinds = ['class', 'function'];
+const kinds = ['class', 'constant', 'function'];
 const namespaces = [];
 
 const handlers = {
