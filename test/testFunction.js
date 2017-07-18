@@ -1,0 +1,5 @@
+/**
+ * Test Function
+ */
+function testFunction() {
+}

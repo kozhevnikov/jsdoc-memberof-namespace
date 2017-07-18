@@ -3,6 +3,9 @@ const path = require('path');
 
 logger.debug('[JMN] Loaded jsdoc-memberof-namespace');
 
+const kinds = ['class', 'function'];
+const namespaces = [];
+
 const handlers = {
   parseBegin: (event) => {
     const files = event.sourcefiles;
@@ -19,36 +22,42 @@ const handlers = {
     files.push(...other);
   },
 
-  fileBegin: (event) => {
-    logger.debug('fileBegin');
-  },
-
-  beforeParse: (event) => {
-    logger.debug('beforeParse');
-  },
-
-  jsdocCommentFound: (event) => {
-    logger.debug('jsdocCommentFound');
-  },
-
-  symbolFound: (event) => {
-    logger.debug('symbolFound');
-  },
-
   newDoclet: (event) => {
-    logger.debug('newDoclet');
-  },
+    const doclet = event.doclet;
 
-  fileComplete: (event) => {
-    logger.debug('fileComplete');
-  },
+    if (doclet.kind === 'namespace' && doclet.meta.filename === 'index.js') {
+      namespaces.push(doclet);
+      logger.debug(`[JMN] Found ${doclet.name} namespace in ${doclet.meta.path}`);
+      return;
+    }
 
-  parseComplete: (event) => {
-    logger.debug('parseComplete');
-  },
+    const file = doclet.meta ? doclet.meta.filename : '*';
+    const desc = `${doclet.name} ${doclet.kind} in ${file}`;
 
-  processingComplete: (event) => {
-    logger.debug('processingComplete');
+    if (!kinds.includes(doclet.kind)) {
+      logger.debug(`[JMN] Skipped ${desc}`);
+      return;
+    }
+
+    if (doclet.memberof) {
+      logger.debug(`[JMN] Skipped ${desc} member of ${doclet.memberof}`);
+      return;
+    }
+
+    const pathspaces = namespaces.filter(ns => doclet.meta.path.startsWith(ns.meta.path));
+
+    if (pathspaces.length === 0) {
+      logger.warn(`[JMN] No namespace found for ${desc}`);
+      return;
+    }
+
+    const namespace = pathspaces.sort((ns1, ns2) => ns2.meta.path.length - ns1.meta.path.length)[0];
+
+    doclet.memberof = namespace.longname;
+    doclet.longname = `${doclet.memberof}.${doclet.longname}`;
+    if (doclet.scope === 'global') doclet.scope = 'static';
+
+    logger.debug(`[JMN] Processed ${desc}`);
   }
 };
 
