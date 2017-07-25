@@ -1,10 +1,22 @@
 {
-  "opts": {
-    "debug": true,
-    "recurse": true
-  },
   "source": {
-    "include": ["test"]
+    "include": "test"
   },
-  "plugins": ["."]
+  "plugins": [
+    "plugins/markdown",
+    "."
+  ],
+  "templates": {
+    "default": {
+      "includeDate": false,
+      "useLongnameInNav": true
+    }
+  },
+  "opts": {
+    "destination": "docs",
+    "readme": "README.md",
+    "pedantic": true,
+    "recurse": true,
+    "debug": true
+  }
 }
