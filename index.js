@@ -61,7 +61,7 @@ function isIndex(file) {
 }
 
 /**
- * Check if directory path contains a subdirectory path
+ * Check if directory path is parent of a subdirectory path
  * @param {string} parent - Directory path
  * @param {string} child - Subdirectory path
  * @return {boolean} - True if subdirectory is in directory, false otherwise

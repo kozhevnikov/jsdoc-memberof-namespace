@@ -21,10 +21,17 @@ export const season = 'Summer';
  * Products available
  * @type {acme.Product[]}
  */
-export const products = [];
+const products = [];
+
+/**
+ * Add product to catalog
+ * @param {acme.Product} product - Product to add
+ */
+function add(product) {
+}
 
 /**
  * Publish catalog
  */
-export function publish() {
+function publish() {
 }

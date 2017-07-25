@@ -43,7 +43,65 @@
 
 
     <section>
-        <article><h1>JSDoc MemberOf Namespace</h1><p><em>JSDoc plugin to automatically generate memberof namespace tags</em></p></article>
+        <article><h1>JSDoc MemberOf Namespace</h1><p><em>JSDoc plugin to automatically generate memberof namespace tags</em></p>
+<p>This plugin creates a <a href="http://usejsdoc.org/tags-memberof.html"><code>@memberof</code></a> tag, if missing, from the <a href="http://usejsdoc.org/tags-namespace.html"><code>@namespace</code></a> tag defined in <code>index.js</code> (<a href="#index-scope">index scope</a>) or the file itself (<a href="#module-scope">module scope</a>). This enables for a complex project with many modules or packages to be documented easily without needing to manually add <code>@memberof</code> tags to every comment to keep documentation organised.</p>
+<p>Sample documentation for <a href="test">test</a> code is available on <a href="https://kozhevnikov.github.io/jsdoc-memberof-namespace/">docs</a> page.</p>
+<h2>Installation and Configuration</h2><p>JSDoc should be <a href="https://www.npmjs.com/package/jsdoc">installed</a> and <a href="http://usejsdoc.org/about-configuring-jsdoc.html">configured</a>.</p>
+<ol>
+<li><p>Install <a href="https://www.npmjs.com/package/jsdoc-memberof-namespace"><code>jsdoc-memberof-namespace</code></a></p>
+<pre class="prettyprint source lang-bash"><code> npm install jsdoc-memberof-namespace --save-dev</code></pre></li>
+<li><p>Add <code>node_modules/jsdoc-memberof-namespace</code> to <a href="http://usejsdoc.org/about-plugins.html"><code>plugins</code></a> in JSDoc <a href="http://usejsdoc.org/about-configuring-jsdoc.html">configuration file</a></p>
+<p>Sample <code>conf.json</code></p>
+<pre class="prettyprint source lang-json"><code>{
+  &quot;source&quot;: {
+    &quot;include&quot;: &quot;src&quot;
+  },
+  &quot;plugins&quot;: [
+    &quot;plugins/markdown&quot;,
+    &quot;node_modules/jsdoc-memberof-namespace&quot;
+  ],
+  &quot;opts&quot;: {
+    &quot;recurse&quot;: true
+  }
+}</code></pre></li>
+</ol>
+<h2>Usage</h2><pre class="prettyprint source lang-javascript"><code>/**
+ * Acme Corporation
+ * @namespace acme
+ */
+
+/**
+ * Base product
+ * Documented as acme.Product
+ */
+class Product {
+    /**
+     * Add product to basket
+     * Documented as acme.Product#buy
+     */
+    buy() { }
+}</code></pre><p>Multiple namespaces can defined in multiple places and the closest applicable namespace will be used:</p>
+<ol>
+<li>The current file (last namespace defined if multiple)</li>
+<li>The <code>index.js</code> in the same directory as the file</li>
+<li>The <code>index.js</code> in any parent directory closest to the file</li>
+</ol>
+<h3>Index Scope</h3><p>Namespace can be defined in <code>index.js</code> file located in same directory as the file being documented or any of the parent directories. It is the easiest way to document your project by simply adding <code>@namespace</code> once alongside your re-exports.</p>
+<h3>Module Scope</h3><p>Namespace can be defined in the file being documented itself. This namespace will only apply to other documentation comments in the file and only those defined after the namespace. The behaviour is similar to <a href="http://usejsdoc.org/tags-module.html"><code>@module</code></a> tag.</p>
+<h2>Notes</h2><ul>
+<li>Only <a href="index.js#L6">classes, constants, and functions</a> are processed, for other <a href="http://usejsdoc.org/tags-kind.html">kinds</a> to be included please submit an issue with sample code</li>
+<li>Prefix references with namespaces as you normally would even if your IDE highlights them as (yet) unresolved<pre class="prettyprint source lang-javascript"><code>/**
+ * @type {acme.Foo}
+ * @param {acme.Bar} bar
+ */</code></pre></li>
+<li>Enable <code>useLongnameInNav</code> default template configuration option to use fully qualified names for navigation<pre class="prettyprint source lang-json"><code>&quot;templates&quot;: {
+  &quot;default&quot;: {
+    &quot;includeDate&quot;: false,
+    &quot;useLongnameInNav&quot;: true
+  }
+}</code></pre></li>
+<li>Add <code>--debug</code> <a href="http://usejsdoc.org/about-commandline.html">command-line option</a> to increase JSDoc logging level and look for messages with <code>[JMN]</code> prefix</li>
+</ul></article>
     </section>
 
 
