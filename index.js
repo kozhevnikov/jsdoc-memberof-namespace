@@ -16,6 +16,11 @@ const handlers = {
     const doc = event.doclet;
     const dsc = `${doc.kind} ${doc.longname} in ${doc.meta ? doc.meta.filename : '.'}`;
 
+    if (doc.undocumented) {
+      logger.verbose(`[JMN] Skipped undocumented ${dsc}`);
+      return;
+    }
+
     if (doc.kind === 'namespace') {
       if (namespaces.every(ns => ns.longname !== doc.longname)) {
         logger.debug(`[JMN] Found ${dsc}`);
