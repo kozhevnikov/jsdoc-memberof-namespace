@@ -4,7 +4,7 @@
 
 This plugin creates a [`@memberof`][jsdoc-memberof] tag, if missing, from the [`@namespace`][jsdoc-namespace] tag defined in `index.js` ([index scope](#index-scope)) or the file itself ([module scope](#module-scope)). This enables for a complex project with many modules or packages to be documented easily without needing to manually add `@memberof` tags to every comment to keep documentation organised.
 
-Sample documentation for [test](test) code is available on [docs](https://kozhevnikov.github.io/jsdoc-memberof-namespace/) page.
+Sample documentation for [test](test) module is available on [docs](https://kozhevnikov.github.io/jsdoc-memberof-namespace/) page.
 
 ## Installation and Configuration
 
@@ -38,11 +38,15 @@ JSDoc should be [installed][npm-jsdoc] and [configured][jsdoc-config].
 ## Usage
 
 ```javascript
+// index.js
 /**
  * Acme Corporation
  * @namespace acme
  */
+```
 
+```javascript
+// Product.js
 /**
  * Base product
  * Documented as acme.Product
@@ -56,19 +60,19 @@ class Product {
 }
 ```
 
-Multiple namespaces can defined in multiple places and the closest applicable namespace will be used:
+Multiple namespaces can be defined in multiple places and the closest applicable namespace will be used:
 
-1. The current file (last namespace defined if multiple)
-2. The `index.js` in the same directory as the file
-3. The `index.js` in any parent directory closest to the file
+1. In the current file (last namespace defined if multiple)
+2. In the `index.js` in the same directory as the file
+3. In the `index.js` in any parent directory closest to the file
 
 ### Index Scope
 
-Namespace can be defined in `index.js` file located in same directory as the file being documented or any of the parent directories. It is the easiest way to document your project by simply adding `@namespace` once alongside your re-exports.
+Namespace can be defined in `index.js` located in same directory as the file or any of the parent directories. It is the easiest way to document your project by simply adding `@namespace` once alongside your re-exports.
 
 ### Module Scope
 
-Namespace can be defined in the file being documented itself. This namespace will only apply to other documentation comments in the file and only those defined after the namespace. The behaviour is similar to [`@module`][jsdoc-module] tag.
+Namespace can be defined in the file itself. This namespace will only apply to other documentation comments in the file and only those defined after the namespace. The behaviour is similar to [`@module`][jsdoc-module] tag.
 
 ## Notes
 

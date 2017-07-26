@@ -45,7 +45,7 @@
     <section>
         <article><h1>JSDoc MemberOf Namespace</h1><p><em>JSDoc plugin to automatically generate memberof namespace tags</em></p>
 <p>This plugin creates a <a href="http://usejsdoc.org/tags-memberof.html"><code>@memberof</code></a> tag, if missing, from the <a href="http://usejsdoc.org/tags-namespace.html"><code>@namespace</code></a> tag defined in <code>index.js</code> (<a href="#index-scope">index scope</a>) or the file itself (<a href="#module-scope">module scope</a>). This enables for a complex project with many modules or packages to be documented easily without needing to manually add <code>@memberof</code> tags to every comment to keep documentation organised.</p>
-<p>Sample documentation for <a href="test">test</a> code is available on <a href="https://kozhevnikov.github.io/jsdoc-memberof-namespace/">docs</a> page.</p>
+<p>Sample documentation for <a href="test">test</a> module is available on <a href="https://kozhevnikov.github.io/jsdoc-memberof-namespace/">docs</a> page.</p>
 <h2>Installation and Configuration</h2><p>JSDoc should be <a href="https://www.npmjs.com/package/jsdoc">installed</a> and <a href="http://usejsdoc.org/about-configuring-jsdoc.html">configured</a>.</p>
 <ol>
 <li><p>Install <a href="https://www.npmjs.com/package/jsdoc-memberof-namespace"><code>jsdoc-memberof-namespace</code></a></p>
@@ -65,11 +65,11 @@
   }
 }</code></pre></li>
 </ol>
-<h2>Usage</h2><pre class="prettyprint source lang-javascript"><code>/**
+<h2>Usage</h2><pre class="prettyprint source lang-javascript"><code>// index.js
+/**
  * Acme Corporation
  * @namespace acme
- */
-
+ */</code></pre><pre class="prettyprint source lang-javascript"><code>// Product.js
 /**
  * Base product
  * Documented as acme.Product
@@ -80,14 +80,14 @@ class Product {
      * Documented as acme.Product#buy
      */
     buy() { }
-}</code></pre><p>Multiple namespaces can defined in multiple places and the closest applicable namespace will be used:</p>
+}</code></pre><p>Multiple namespaces can be defined in multiple places and the closest applicable namespace will be used:</p>
 <ol>
-<li>The current file (last namespace defined if multiple)</li>
-<li>The <code>index.js</code> in the same directory as the file</li>
-<li>The <code>index.js</code> in any parent directory closest to the file</li>
+<li>In the current file (last namespace defined if multiple)</li>
+<li>In the <code>index.js</code> in the same directory as the file</li>
+<li>In the <code>index.js</code> in any parent directory closest to the file</li>
 </ol>
-<h3>Index Scope</h3><p>Namespace can be defined in <code>index.js</code> file located in same directory as the file being documented or any of the parent directories. It is the easiest way to document your project by simply adding <code>@namespace</code> once alongside your re-exports.</p>
-<h3>Module Scope</h3><p>Namespace can be defined in the file being documented itself. This namespace will only apply to other documentation comments in the file and only those defined after the namespace. The behaviour is similar to <a href="http://usejsdoc.org/tags-module.html"><code>@module</code></a> tag.</p>
+<h3>Index Scope</h3><p>Namespace can be defined in <code>index.js</code> located in same directory as the file or any of the parent directories. It is the easiest way to document your project by simply adding <code>@namespace</code> once alongside your re-exports.</p>
+<h3>Module Scope</h3><p>Namespace can be defined in the file itself. This namespace will only apply to other documentation comments in the file and only those defined after the namespace. The behaviour is similar to <a href="http://usejsdoc.org/tags-module.html"><code>@module</code></a> tag.</p>
 <h2>Notes</h2><ul>
 <li>Only <a href="index.js#L6">classes, constants, and functions</a> are processed, for other <a href="http://usejsdoc.org/tags-kind.html">kinds</a> to be included please submit an issue with sample code</li>
 <li>Prefix references with namespaces as you normally would even if your IDE highlights them as (yet) unresolved<pre class="prettyprint source lang-javascript"><code>/**
