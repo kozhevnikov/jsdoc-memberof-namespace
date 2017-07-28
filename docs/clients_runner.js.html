@@ -27,36 +27,38 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * `runner` namespace overwrites `acme` index namespace
- * @namespace external.runner
+ * `external` namespace overwrites `acme` index namespace
+ * @namespace external
  */
 
 /**
- * First name
- * @type {string}
- * @default
+ * `runner` namespace is an object literal (i.e. has no name) and added as member of `external`
+ * @namespace
  */
-const firstName = 'Road';
+const runner = {
+  /**
+   * First name
+   * @type {string}
+   * @default
+   */
+  firstName: 'Road'
+};
 
 /**
  * Last name
  * @type {string}
  * @default
  */
-const lastName = 'Runner';
+runner.lastName = 'Runner';
 
 /**
  * Get full name
  * @return {string} Full name
  */
-function fullName() {
-}
+runner.fullName = () => {
+};
 
-export {
-  firstName,
-  lastName,
-  fullName
-}
+export default runner;
 </code></pre>
         </article>
     </section>
@@ -67,7 +69,7 @@ export {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="acme.Anvil.html">acme.Anvil</a></li><li><a href="acme.Boomerang.html">acme.Boomerang</a></li><li><a href="acme.Product.html">acme.Product</a></li></ul><h3>Namespaces</h3><ul><li><a href="acme.html">acme</a></li><li><a href="acme.catalog.html">acme.catalog</a></li><li><a href="external.coyote.html">external.coyote</a></li><li><a href="external.runner.html">external.runner</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="acme.Anvil.html">acme.Anvil</a></li><li><a href="acme.Boomerang.html">acme.Boomerang</a></li><li><a href="acme.Product.html">acme.Product</a></li></ul><h3>Namespaces</h3><ul><li><a href="acme.html">acme</a></li><li><a href="acme.catalog.html">acme.catalog</a></li><li><a href="external.html">external</a></li><li><a href="external.coyote.html">external.coyote</a></li><li><a href="external.runner.html">external.runner</a></li></ul>
 </nav>
 
 <br class="clear">
