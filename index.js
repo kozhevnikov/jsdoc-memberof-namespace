@@ -3,7 +3,7 @@ const path = require('path');
 
 logger.debug('[JMN] Loaded jsdoc-memberof-namespace');
 
-const kinds = ['class', 'constant', 'function'];
+const kinds = ['class', 'constant', 'function', 'namespace'];
 const namespaces = [];
 
 const handlers = {
@@ -21,7 +21,7 @@ const handlers = {
       return;
     }
 
-    if (doc.kind === 'namespace') {
+    if (doc.kind === 'namespace' && isEmpty(doc.meta.code)) {
       if (namespaces.every(ns => ns.longname !== doc.longname)) {
         logger.debug(`[JMN] Found ${dsc}`);
       } else {
@@ -55,6 +55,15 @@ const handlers = {
     logger.debug(`[JMN] Processed ${dsc} member of ${doc.memberof}`);
   }
 };
+
+/**
+ * Check if value is falsy or empty
+ * @param {Object} value - Object
+ * @return {boolean} - True if falsy or empty, false otherwise
+ */
+function isEmpty(value) {
+  return !value || Object.keys(value).length === 0;
+}
 
 /**
  * Check if file path is an index.js file

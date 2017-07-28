@@ -1,31 +1,33 @@
 /**
- * `runner` namespace overwrites `acme` index namespace
- * @namespace external.runner
+ * `external` namespace overwrites `acme` index namespace
+ * @namespace external
  */
 
 /**
- * First name
- * @type {string}
- * @default
+ * `runner` namespace is an object literal (i.e. has no name) and added as member of `external`
+ * @namespace
  */
-const firstName = 'Road';
+const runner = {
+  /**
+   * First name
+   * @type {string}
+   * @default
+   */
+  firstName: 'Road'
+};
 
 /**
  * Last name
  * @type {string}
  * @default
  */
-const lastName = 'Runner';
+runner.lastName = 'Runner';
 
 /**
  * Get full name
  * @return {string} Full name
  */
-function fullName() {
-}
+runner.fullName = () => {
+};
 
-export {
-  firstName,
-  lastName,
-  fullName
-}
+export default runner;
